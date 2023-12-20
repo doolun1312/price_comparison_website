@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+<!-- Define your Hibernate_Session bean -->
+<bean id="hibernateSession" class="org.example.Hibernate_Session">
+    <!-- You can inject necessary dependencies, if any -->
+</bean>
+
+<!-- Define other beans as needed -->
+
+</beans>
