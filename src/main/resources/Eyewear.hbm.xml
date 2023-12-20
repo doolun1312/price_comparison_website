@@ -1,0 +1,22 @@
+<!--<?xml version="1.0" encoding="UTF-8"?>-->
+<!--<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-mapping-3.0.dtd">-->
+<!--<hibernate-mapping>-->
+<!--    <class name="org.example.EyewearXml" table="eyewear">-->
+<!--        <id name="id" type="int">-->
+<!--            <column name="id"/>-->
+<!--            <generator class="increment"/>-->
+<!--        </id>-->
+<!--        <property name="name" type="text">-->
+<!--            <column name="name"/>-->
+<!--        </property>-->
+<!--        <property name="description" type="text">-->
+<!--            <column name="description"/>-->
+<!--        </property>-->
+<!--        <property name="image_url" type="text">-->
+<!--            <column name="image_url"/>-->
+<!--        </property>-->
+<!--        <property name="brand" type="text">-->
+<!--            <column name="brand"/>-->
+<!--        </property>-->
+<!--    </class>-->
+<!--</hibernate-mapping>-->
