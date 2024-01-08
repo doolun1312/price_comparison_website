@@ -29,79 +29,79 @@ public class DiscountedSunglassesScraper extends Thread{
 //                //Set up the SessionFactory
                 hibernate.init();
 
-                // Download HTML document from website
-                Document doc = Jsoup.connect("https://www.discountedsunglasses.co.uk/brands/glasses?p=" + page).get();
+                    // Download HTML document from website
+                    Document doc = Jsoup.connect("https://www.discountedsunglasses.co.uk/brands/glasses?p=" + page).get();
 
-                String website = "DiscountedSunglasses";
+                    String website = "DiscountedSunglasses";
 
-                // Get all of the products on the page
-                Elements prods = doc.select(".product-item");
+                    // Get all of the products on the page
+                    Elements prods = doc.select(".product-item");
 
-                // Work through the products
-                for(int i=0; i<prods.size(); ++i) {
-                    // Get the product description
-                    Elements name = prods.get(i).select(".product-item-name");
+                    // Work through the products
+                    for (int i = 0; i < prods.size(); ++i) {
+                            while (hibernate.getCount() < 20) {
+                                // Get the product description
+                                Elements name = prods.get(i).select(".product-item-name");
 
-                    // Get the product image
-                    Elements image = prods.get(i).select(".product-image-wrapper  img");
-                    String productImage = image.attr("src");
+                                // Get the product image
+                                Elements image = prods.get(i).select(".product-image-wrapper  img");
+                                String productImage = image.attr("src");
 
-                    // Get the product link
-                    Elements link = prods.get(i).select(".product-item-name a");
-                    String productLink = link.attr("href").trim();
+                                // Get the product link
+                                Elements link = prods.get(i).select(".product-item-name a");
+                                String productLink = link.attr("href").trim();
 
 
+                                if (name.isEmpty() || productLink.isEmpty()) {
 
-                    if (name.isEmpty() || productLink.isEmpty()) {
+                                } else {
+                                    Document doc1 = Jsoup.connect(productLink).get();
+                                    // Get all of the info on the page
+                                    Elements priceContain = doc1.select(".price-container:contains(Our Price)");
+                                    String priceText = priceContain.text();
+                                    String price = priceText.substring(priceText.indexOf("Our Price") + "Our Price".length()).trim();
+                                    Elements brand = doc1.select("#product-attribute-specs-table > tbody > tr:nth-child(1) > td");
+                                    Elements description = doc1.select(".description");
+                                    Elements model = doc1.select("#product-attribute-specs-table > tbody > tr:nth-child(2) > td");
+                                    // Get the product price
 
-                    } else {
-                        Document doc1 = Jsoup.connect(productLink).get();
-                        // Get all of the info on the page
-                        Elements priceContain = doc1.select(".price-container:contains(Our Price)");
-                        String priceText = priceContain.text();
-                        String price = priceText.substring(priceText.indexOf("Our Price") + "Our Price".length()).trim();
-                        Elements brand = doc1.select("#product-attribute-specs-table > tbody > tr:nth-child(1) > td");
-                        Elements description = doc1.select(".description");
-                        // Get the product price
+                                    if (description.isEmpty() && brand.isEmpty() && image.isEmpty()) {
 
-                        if (description.isEmpty() && brand.isEmpty() && image.isEmpty()) {
+                                    } else {
 
-                        } else {
+                                        // Output the data that we have downloaded
+                                        System.out.println("WEBSITE: " + website +
+                                                " NAME: " + name.text() +
+                                                " MODEL: " + model.text() +
+                                                " DESCRIPTION: " + description.text() +
+                                                " BRAND: " + brand.text() +
+                                                " PRICE: " + price +
+                                                " LINK: " + productLink +
+                                                " IMAGE: " + productImage);
 
-                            // Output the data that we have downloaded
-                            System.out.println("WEBSITE: " + website +
-                                    " NAME: " + name.text() +
-                                " DESCRIPTION: " + description.text() +
-                                    " BRAND: " + brand.text() +
-                                    " PRICE: " + price +
-                                    " LINK: " + productLink +
-                                    " IMAGE: " + productImage );
-
-                            // Check if the product already exists in the database
-                            if (!hibernate.searchEyewear(name.text())) {
-//                             Product doesn't exist, add it to the database
-                                hibernate.addEyewear(name.text(), description.text(), productImage, brand.text(), "", productLink, price);
-                            } else {
-//                             Product already exists, you may want to log or handle this case
-                                System.out.println("Product already exists in the database: " + name.text());
+                                        // Check if the product already exists in the database
+                                        if (!hibernate.searchEyewear(name.text())) {
+                                            //                             Product doesn't exist, add it to the database
+                                            hibernate.addEyewear(name.text(), model.text(), description.text(), productImage, brand.text(), "", productLink, price);
+                                        } else {
+                                            //                             Product already exists, you may want to log or handle this case
+                                            System.out.println("Product already exists in the database: " + name.text());
+                                        }
+                                    }
+                                }
                             }
-                        }
                     }
+
+                    if (page > 10) {
+                        // No next page, stop scraping
+                        stopThread();
+                    } else {
+                        // Move to the next page
+                        page++;
+                    }
+                } catch(Exception ex){
+                    ex.printStackTrace();
                 }
-
-
-
-//                    }
-
-                if (page > 10) {
-                    // No next page, stop scraping
-                    stopThread();
-                } else {
-                    // Move to the next page
-                    page++;
-                }
-            } catch (Exception ex) {
-                ex.printStackTrace();
             }
 
             // Sleep for the crawl delay, which is in seconds
@@ -111,7 +111,7 @@ public class DiscountedSunglassesScraper extends Thread{
                 System.err.println(ex.getMessage());
             }
         }
-    }
+
 
     //Other classes can use this method to terminate the thread.
     public void stopThread(){

@@ -64,7 +64,7 @@ public class Hibernate_Session {
         sessionFactory.close();
     }
     /** Adds a new eyewear to the database */
-    public void addEyewear(String name, String description, String image_url, String brand, String size, String url, String price){
+    public void addEyewear(String name, String model, String description, String image_url, String brand, String size, String url, String price){
         //Get a new Session instance from the session factory
         Session session = sessionFactory.getCurrentSession();
 
@@ -78,6 +78,7 @@ public class Hibernate_Session {
 
         //Set values of Eyewear class that we want to add
         eyewear.setName(name);
+        eyewear.setModel(model);
         eyewear.setDescription(description);
         eyewear.setImage_url(image_url);
         eyewear.setBrand(brand);
@@ -146,6 +147,22 @@ public class Hibernate_Session {
         //Close the session and release database connection
         session.close();
         System.out.println("Eyewear updated in database. ID: " + eyewear.getId());
+    }
+
+    public int getCount() {
+        //Get a new Session instance from the session factory
+        Session session = sessionFactory.getCurrentSession();
+        // Start transaction
+        session.beginTransaction();
+
+        // Use parameters in the query to avoid SQL injection
+        Query<Long> query = session.createQuery("select count(*) from EyewearAnnotation", Long.class);
+
+        Long count = query.uniqueResult();
+        // Close the session and release the database connection
+        session.close();
+        // Return the count as an int
+        return count.intValue();
     }
 
 

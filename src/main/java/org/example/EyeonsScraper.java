@@ -31,7 +31,7 @@ public class EyeonsScraper extends Thread{
                 hibernate.init();
 
                 // Download HTML document from website
-                Document doc = Jsoup.connect("https://www.eyeons.com/eyeglasses/" + "?page=" + page).get();
+                Document doc = Jsoup.connect("https://www.eyeons.com/eyeglasses/?page=" + page).get();
 
                 String website = "Eyeons";
 
@@ -62,6 +62,8 @@ public class EyeonsScraper extends Thread{
                     String brand = brandContain.text().replace("Manufacturer:", "").trim();
                     Elements description = doc1.select(".overview-box");
                     Elements size = doc1.select(".hcol-attribute");
+                    Elements modelContain = doc1.select(".tab-tableItem:contains(Model)");
+                    String model = modelContain.text().replace("Model:", "").trim();
 
 
 
@@ -71,6 +73,7 @@ public class EyeonsScraper extends Thread{
                         // Output the data that we have downloaded
                         System.out.println("WEBSITE: " + website +
                                 " NAME: " + name.text() +
+                                " MODEL: " + model +
                                 " DESCRIPTION: " + description.text() +
                                 " BRAND: " + brand +
                                 " PRICE: " + price.text() +
@@ -81,7 +84,7 @@ public class EyeonsScraper extends Thread{
                         // Check if the product already exists in the database
                         if (!hibernate.searchEyewear(name.text())) {
                             // Product doesn't exist, add it to the database
-                            hibernate.addEyewear(name.text(), description.text(), productImage, brand, size.text(), productLink, price.text());
+                            hibernate.addEyewear(name.text(), model, description.text(), productImage, brand, size.text(), productLink, price.text());
                         } else {
                             // Product already exists, you may want to log or handle this case
                             System.out.println("Product already exists in the database: " + name.text());

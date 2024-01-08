@@ -61,9 +61,48 @@ public class EyebuydirectSraper extends Thread{
 //                    Elements brandContain = doc1.select(".product-tag a img");
 //                    String brand = brandContain.attr("alt");
 
-                    Elements brand = prods.get(i).select(".item-name");
+
                     Elements description = doc1.select(".desc-text");
                     Elements size = doc1.select(".size");
+
+                    // Assuming you have already obtained the brand information from the HTML element with the class "item-name"
+                    Elements brandElement = prods.get(i).select(".item-name");
+                    String brand = brandElement.text().trim();
+
+// Split the brand into words
+                    String[] brandWords = brand.split("\\s+");
+                    String model = "";
+
+// Check if the brand contains "ray-ban"
+                    if (brand.toLowerCase().contains("ray-ban")) {
+                        // Set "ray-ban" as the brand and the rest as the model
+                        model = brand.replace("Ray-Ban", "").trim();
+                        brand = "Ray-Ban";
+                        System.out.println("Brand: " + brand);
+                        System.out.println("Model: " + model);
+                    } else if (brand.toLowerCase().contains("oakley")) {
+                        // Set "Oakley" as the brand and the rest as the model
+                        model = brand.replace("Oakley", "").trim();
+                        brand = "Oakley";
+                        System.out.println("Brand: " + brand);
+                        System.out.println("Model: " + model);
+                    } else if (brand.toLowerCase().contains("vogue eyewear")) {
+                        // Set "Vogue eyewear" as the brand and the rest as the model
+                        model = brand.replace("Vogue Eyewear", "").trim();
+                        brand = "Vogue Eyewear";
+                        System.out.println("Brand: " + brand);
+                        System.out.println("Model: " + model);
+                    } else {
+                        // If none of the specific cases match, you can use your original logic
+                        brandWords = brand.split("\\s+");
+                        if (brandWords.length > 1) {
+                            model = brandWords[brandWords.length - 1];
+                            brand = brand.substring(0, brand.lastIndexOf(model)).trim();
+                        } else {
+                            model = brand;
+                        }
+                    }
+
 
                     if (name.isEmpty() && brand.isEmpty() && size.isEmpty()  && description.isEmpty()  && productImage.isEmpty()) {
 
@@ -72,8 +111,9 @@ public class EyebuydirectSraper extends Thread{
                         // Output the data that we have downloaded
                         System.out.println("WEBSITE: " + website +
                                 " NAME: " + name.text() +
+                                " MODEL: " + model +
                             " DESCRIPTION: " + description.text() +
-                                " BRAND: " + brand.text() +
+                                " BRAND: " + brand+
                             " PRICE: " + price.text() +
                                 " LINK: " + productLink +
                             " IMAGE: " + productImage +
@@ -82,7 +122,7 @@ public class EyebuydirectSraper extends Thread{
                         // Check if the product already exists in the database
                         if (!hibernate.searchEyewear(name.text())) {
                             //add data to database
-                            hibernate.addEyewear(name.text(), description.text(), productImage, brand.text(), size.text(), productLink, price.text());//Add data
+                            hibernate.addEyewear(name.text(), model, description.text(), productImage, brand, size.text(), productLink, price.text());//Add data
                         } else {
                             // Product already exists, you may want to log or handle this case
                             System.out.println("Product already exists in the database: " + name.text());

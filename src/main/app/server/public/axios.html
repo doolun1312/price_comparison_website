@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Axios</title>
+
+    <!-- Axios library -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <script>
+        //Load cereals after window has loaded.
+        window.onload = loadEyewear;
+
+        /** Retreives cereals data from web service */
+        function loadEyewear() {
+            axios.get('/glasses')//Send GET request to cereals path
+                .then(function (response) {//Request successful
+                    //Output cereals data
+                    console.log("---------- Data Received from Web Service -------------");
+                    console.log(JSON.stringify(response.data.data));
+                })
+                .catch(function (error) {
+                    //Handle error
+                    console.log(error);
+                });
+        }
+        //     axios.get('/glasses')//Send GET request to glasses path
+        //         .then(function (response) {//Request successful
+        //             //Output cereals data
+        //             console.log("---------- Data Received from Web Service -------------");
+        //             // console.log(response.data.data);
+        //             // Access each item separately and log details
+        //             response.data.data.forEach(item => {
+        //                 console.log('ID:', item.id);
+        //                 console.log('Name:', item.name);
+        //                 console.log('Description:', item.description);
+        //                 // Log other properties as needed
+        //                 console.log('---'); // Separator for clarity
+        //             });
+        //         })
+        //         .catch(function (error) {
+        //             //Handle error
+        //             console.log(error);
+        //         });
+        // }
+    </script>
+</body>
+</html>
+
+

@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Vue with Web Service Demo</title>
+
+    <!-- Vue development version, includes helpful console warnings -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+    <!-- Axios library -->
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+</head>
+<body>
+
+<nav>
+    <div class="wrapper1">
+        <div class="logo"><img id="logo" src="./assets/logo.png" alt="logo"></div>
+        <ul class="nav-links">
+            <li>
+                <form id="glassesForm" action="" >
+                    <img id="searchimg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAdFJREFUSEu1ld1RwzAQhPckBiyHGUgHUAFJBYQOQgXQAdABVIBTAaEDqIBQAe4AOiCegYgH5GMkLGOCLSdDokdL2m/vR2fCmhetWR+NANZ6Lyc6AzAAc88ZIUoBTATziJR6WcRcLcDMZgm+xZsXUSKj6KIN8gdgZrMURAfFxVthTELb29Y5+O2tl0t5DuDERySjqB/0Ud2sOM+EMQMvPC9QgCYAdsA8knFsobWrjMDlHHi2p4QxfSvOr6+7eRRduzp8r4n4+LigbndaQJ7ceWC/qSYloHRfcfSp9SkBN7+sMU8FUd8KGq3HLl2BKKoAl3vv3ot+vr8PpRCuBgYYE3BIzPcijodlFERpUy1+AFqzFZFKhVvXppF5KuO466At95YC1FWxAGRSqd26/dYUhVrQp4iBxw2lfCP8uhIsctsjWqrIdW26iHsAmQB6rW3qCuZHhG3FPD8KPjQhHkBk834llbpsfWj+wNyoGAtjRnOjws6o01KQKBVaH9nHFyxyw8hoMpYBSMA8dHMrAAn3PLOdMYNi+GUMpMScCqLE5tyNkq2tSQjy7x9OG+TfAJvDKoTz/Hij07nzuV0JwEPM5uagKm6/rwywcJu2vd5l99cewRf80BEow+YK9wAAAABJRU5ErkJggg=="/>
+                    <input type="text" id="searchQuery" onfocus="this.value=''" placeholder="Search" required>
+                </form>
+            </li>
+            <li><a id="homeLink" ><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAYBJREFUSEvNlL8uREEUxn+fQuMBFBJ2xZ9QKhQkoiQhCpWGRKfX8AREqxOJJ1AhOoVQSSQSCSKsQuEBJCrHnc3szey6u3fuxiamm+Sc73fOmTOf6PBRh/WJBphZL3AKfAOLkj5iiosCePFrYNCLvgBTMZBcgBe/BIaBNw8YAJ6AmTxIS0BD5e/AtAdcAX1AbidNAVnikqodmJnrIAqSCWglXnvYWMgvQIx4EUgdoIh4LCQFNGyLyy9LqsTsupmVgFcfW7ddIeAeGK8JSspd4RBuZhbcbyVNuHsIeARG/gjwIGmsDhDMtFpJrQMzG5L03DgqM+sCSpLcX3CrW5eXFpqRmAaa2QUwCyxIcj6UHjNbBw6Bc0nz7QLWkiqPgE9gw5tdNzAH7AM9wLKk47YAvvU9YDNjm1yn25J22h5R8C4rie+sApPAVzKym8SLDiSdNHu7qDeI+QP/EuAcs79I9UFsRVI5zM0yuyVgFxgtCLkDtiSdtQQUFM0NL+Q3uWoZAT9SFtIZp/mi/gAAAABJRU5ErkJggg=="/></a></li>
+            <li><a id="productsLink" ><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAATJJREFUSEvtlTtKBGEQhL86hGggGohgYuBGegPBwKOoLOIj0sgFZcXL6A0EAzURRANBYdFblI7MLD07O69gQWEnGpjq/v6uLv4RE3404f5MAbUOFyyyfQNsZpWSKm207UC5lrQVqbli2x3gPidoB0hKO5IehweMzWz3gAOgL6lbO38Q2O4De0BP0lEZ4B1YANYl3bUEbAC3wIekxQIg2JMTtIR8AnPRpuEOgj0XkvbbNM60ti+B3WhTBLwCyyWNn4GupCRh2N5OmgArJfoXSb/fIiDGbVzdm6SlFPAFzFZNmcW7ABiX+5GsD/tWaf8mIDtVNlHbCbKIrUp6CslYAx6AgaT5dAeNtXEHZ8BhxeJOf26NkxTQWBsByfsxsAPMBNAAuJJ0HqZqrJ3+cGpvlP9v0Td1A6AZXHJqbQAAAABJRU5ErkJggg=="/></a></li>
+        </ul>
+    </div>
+</nav>
+
+
+
+<div id="home">
+
+    <div class="slideshow-container">
+
+        <div class="myBox">
+            <img id="mainlogo" src="./assets/logo.png" alt="logo"> <br><br><br><br>
+            <form id="glassesForm1" action="" >
+                <input type="text" id="searchQuery1" onfocus="this.value=''" placeholder="Search" required>
+                <img id="searchimg1" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAdFJREFUSEu1ld1RwzAQhPckBiyHGUgHUAFJBYQOQgXQAdABVIBTAaEDqIBQAe4AOiCegYgH5GMkLGOCLSdDokdL2m/vR2fCmhetWR+NANZ6Lyc6AzAAc88ZIUoBTATziJR6WcRcLcDMZgm+xZsXUSKj6KIN8gdgZrMURAfFxVthTELb29Y5+O2tl0t5DuDERySjqB/0Ud2sOM+EMQMvPC9QgCYAdsA8knFsobWrjMDlHHi2p4QxfSvOr6+7eRRduzp8r4n4+LigbndaQJ7ceWC/qSYloHRfcfSp9SkBN7+sMU8FUd8KGq3HLl2BKKoAl3vv3ot+vr8PpRCuBgYYE3BIzPcijodlFERpUy1+AFqzFZFKhVvXppF5KuO466At95YC1FWxAGRSqd26/dYUhVrQp4iBxw2lfCP8uhIsctsjWqrIdW26iHsAmQB6rW3qCuZHhG3FPD8KPjQhHkBk834llbpsfWj+wNyoGAtjRnOjws6o01KQKBVaH9nHFyxyw8hoMpYBSMA8dHMrAAn3PLOdMYNi+GUMpMScCqLE5tyNkq2tSQjy7x9OG+TfAJvDKoTz/Hij07nzuV0JwEPM5uagKm6/rwywcJu2vd5l99cewRf80BEow+YK9wAAAABJRU5ErkJggg=="/>
+            </form>
+            
+        </div>
+        <div class="mySlides fade">
+            <img src="./assets/slide1.jpg" style="width:100%">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="./assets/slide2.jpg" style="width:100%">
+        </div>
+
+        <div class="mySlides fade">
+            <img src="./assets/slide3.jpeg" style="width:100%">
+        </div>
+
+
+    </div>
+    <br>
+
+    <div style="text-align:center">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+
+</div>
+
+
+
+<div id="app">
+<!--    <a v-for="eyewear in eyewears" :key="eyewear.id" :href="'/glasses/' + eyewear.id" class="product-item">-->
+<!--        <img :src="eyewear.image_url" alt="Product Image">-->
+<!--        <div class="product-details">-->
+<!--            <b>id</b>: {{ eyewear.id }}<br>-->
+<!--            <b>name</b>: {{ eyewear.name }}<br>-->
+<!--            <b>brand</b>: {{ eyewear.brand }}<br>-->
+<!--            <b>price</b>: {{ eyewear.price }}-->
+<!--        </div>-->
+<!--    </a>-->
+
+    <h1>Eyewear</h1>
+
+    <div class="product-grid">
+        <a v-for="eyewear in eyewears" :key="eyewear.id" :href="'/glasses/' + eyewear.id" class="product-item">
+            <div class="wrapper">
+                <div class="container">
+                    <div class="top">
+                        <img :src="eyewear.image_url" alt="Product Image">
+                    </div>
+                    <div class="bottom">
+                            <div class="details">
+                                <h3>{{ eyewear.name }}</h3>
+                                <p>{{ eyewear.price }}</p>
+
+                        </div>
+                    </div>
+                    <div class="inside">
+                        <div class="icon"><i class="material-icons"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAlVJREFUSEvFlUuIzlEYxn+PhImm2DFCWVAmpMZKjZVckhBjMaOUJJnGYrIwcsnMapJyK1kQSiw0uUZZyGUnt0gYNNkqmnKJvM47nW/6vjP///f5vpqc1b/zf895nnPe53mOGOWhUd6fsgBmNh5YDywHFgCzAAM+Ak+BW8AVSb/yiOYCmNkK4GTctNxB3wHbJd3NKsoEMLMDgen+uGAAuATcAJ7FuYXAamAjMD3OdUo6nIKMACjafBBoBa5J8msZMcxsDLABOAPUAR2SjhYXlgCYmbO6CnwPjJskvfwXEZjZYuAh4IDNkh4U1g0DmNkk4A0wFWiTdCHd3MLxfE5S1sl3AUeA16Hx8wuNLwbYAZwI9/oKaMy6lgoA46K6nOBaSX1DZAoswzFvAq6cnZIcqOphZj3AHuC0pG0pwKfwowGYLel91bu7QcyWAPeBJ5IWpQDfohLqJP3IUU1uD7zezKYAn4EvkianAC5Lb3S9JP/OkmUlgHrgKzAoyb9LeuDdnxMV8KJGAL+Wxy4USfNSgItBYpuA3ZJ6awTYCxwKfTwf+rg5BWgDzgFvgbmS/lTpg7HBP/3ADKBF0uUUwK3u1+QFWySdrRKgHfCYcLO60X6WAEQVLANu1xAVTcCjGBVLJblUh0aW5buA7qiGVknX8zwRw67FjQVMDBJtl3S8uD4vrvcF8IOx8EOMa3f6c8AjoTGYaU1M0mnxEfIkPZaSKffgrArBdyq6u5yx/cHZKuleVlGlJ3NCYL0OWOmNC7k/M7J1tbje7wB9kn7nMfi/j34tgZeu+QtyfuYZe3ZfmwAAAABJRU5ErkJggg=="/></i></div>
+                        <div class="contents">
+                            <table>
+                                <tr>
+                                    <th>Brand</th>
+                                    <th>Model</th>
+                                </tr>
+                                <tr>
+                                    <td>{{ eyewear.brand }}</td>
+                                    <td>{{ eyewear.model }}</td>
+                                </tr>
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="pagination">
+        <div class="container">
+            <span>
+                <div class="index" @click="changePage(1)">1</div>
+                <div class="index" @click="changePage(2)">2</div>
+                <div class="index" @click="changePage(3)">3</div>
+                <div class="index" @click="changePage(4)">4</div>
+                <div class="index" @click="changePage(5)">5</div>
+            </span>
+            <svg viewBox="0 0 100 100">
+                <path
+                        d="m 7.1428558,49.999998 c -1e-7,-23.669348 19.1877962,-42.8571447 42.8571442,-42.8571446 23.669347,0 42.857144,19.1877966 42.857144,42.8571446" />
+            </svg>
+            <svg viewBox="0 0 100 100">
+                <path
+                        d="m 7.1428558,49.999998 c -1e-7,23.669347 19.1877962,42.857144 42.8571442,42.857144 23.669347,0 42.857144,-19.187797 42.857144,-42.857144" />
+            </svg>
+        </div>
+    </div>
+<!--    <div class="product-grid">-->
+<!--        <a v-for="eyewear in eyewears" :key="eyewear.id" :href="'/glasses/' + eyewear.id" class="product-item">-->
+<!--            <img :src="eyewear.image_url" alt="Product Image">-->
+<!--            <div class="product-details">-->
+<!--                <b>id</b>: {{ eyewear.id }}<br>-->
+<!--                <b>name</b>: {{ eyewear.name }}<br>-->
+<!--                <b>brand</b>: {{ eyewear.brand }}<br>-->
+<!--                <b>price</b>: {{ eyewear.price }}-->
+<!--            </div>-->
+<!--        </a>-->
+<!--    </div>-->
+</div>
+
+<div id="prod">
+    <div id="productPage">
+        <div class="container">
+            <div class="images">
+                <img src="http://mistillas.cl/wp-content/uploads/2018/04/Nike-Epic-React-Flyknit-%E2%80%9CPearl-Pink%E2%80%9D-01.jpg" />
+            </div>
+            <div class="slideshow-buttons">
+                <div class="one"></div>
+                <div class="two"></div>
+                <div class="three"></div>
+                <div class="four"></div>
+            </div>
+            <p class="pick">choose size</p>
+            <div class="sizes">
+                <div class="size">5</div>
+                <div class="size">6</div>
+                <div class="size">7</div>
+                <div class="size">8</div>
+                <div class="size">9</div>
+                <div class="size">10</div>
+                <div class="size">11</div>
+                <div class="size">12</div>
+            </div>
+            <div class="product">
+                <p>Women's Running Shoe</p>
+                <h1>Nike Epic React Flyknit</h1>
+                <h2>$150</h2>
+                <p class="desc">The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.</p>
+                <div class="buttons">
+                    <button class="add">Add to Cart</button>
+                    <button class="like"><span>♥</span></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="productPage2">
+        <h1>UL icon cards</h1>
+        <ul>
+            <li style="--accent-color:#60c5a6">
+                <div class="icon"><i class="fa-brands fa-codepen"></i></div>
+                <div class="title">Codepen</div>
+                <div class="descr">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, impedit?</div>
+            </li>
+            <li style="--accent-color:#f20071">
+                <div class="icon"><i class="fa-brands fa-html5"></i></div>
+                <div class="title">HTML 5</div>
+                <div class="descr">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+            </li>
+            <li style="--accent-color:#FCBA35">
+                <div class="icon"><i class="fa-brands fa-css3"></i></div>
+                <div class="title">CSS 3</div>
+                <div class="descr">Lorem ipsum dolor sit.</div>
+            </li>
+            <li style="--accent-color:#DAE438">
+                <div class="icon"><i class="fa-brands fa-js"></i></div>
+                <div class="title">Javascript</div>
+                <div class="descr">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor laboriosam odio alias.</div>
+            </li>
+            <li style="--accent-color:#994D7F">
+                <div class="icon"><i class="fa-brands fa-github"></i></div>
+                <div class="title">Github</div>
+                <div class="descr">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
+            </li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- Link to api.js -->
+
+<script>
+
+    let slideIndex = 0;
+    showSlides();
+
+    function showSlides() {
+        let i;
+        let slides = document.getElementsByClassName("mySlides");
+        let dots = document.getElementsByClassName("dot");
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        slideIndex++;
+        if (slideIndex > slides.length) {slideIndex = 1}
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex-1].style.display = "block";
+        dots[slideIndex-1].className += " active";
+        setTimeout(showSlides, 3000); // Change image every 2 seconds
+    }
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // Get the "Products" link by its ID
+        var homeLink = document.getElementById('homeLink');
+        var appElement = document.getElementById('app');
+        var searchbox=document.getElementById('searchQuery1');
+
+        // Get the #app element
+        var homeElement = document.getElementById('home');
+
+
+        // Add a click event listener to the "Products" link
+        homeLink.addEventListener('click', function (event) {
+            // Prevent the default link behavior
+            event.preventDefault();
+            // Toggle the display property of the #app element
+            homeElement.style.display = 'block';
+            searchbox.value="";
+            appElement.style.display='none';
+        });
+    });
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+        // Get the "Products" link by its ID
+        var productsLink = document.getElementById('productsLink');
+
+        // Get the #app element
+        var appElement = document.getElementById('app');
+        var homeElement = document.getElementById('home');
+
+        var search = document.getElementById('searchQuery');
+        var search1=document.getElementById('searchQuery1');
+
+
+
+        // Add a click event listener to the "Products" link
+        productsLink.addEventListener('click', function (event) {
+            // Prevent the default link behavior
+            event.preventDefault();
+            search.value='';
+            search1.value='';
+            // Toggle the display property of the #app element
+            appElement.style.display = 'block';
+            homeElement.style.display = 'none';
+        });
+    });
+
+    function search(){
+        const searchbox = document.getElementById('searchQuery')
+
+        // Get the search query from the input field
+        const searchQuery = document.getElementById('searchQuery').value;
+
+
+        // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint
+        const apiEndpoint = '/glasses/';
+
+        // Append the search query to the API endpoint
+        const fullApiEndpoint = `${apiEndpoint}${searchQuery}`;
+
+        // Make the Axios GET request
+        axios.get(fullApiEndpoint)
+            .then(response => {
+                // Handle the successful response
+                console.log(response.data);
+            })
+            .catch(error => {
+                // Handle errors
+                console.error('Error:', error);
+            });
+    }
+
+    // Listen for the Enter key press
+    const searchbox=document.getElementById('searchQuery');
+    const searchbox1=document.getElementById('searchQuery1');
+
+        searchbox.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            searchbox1.value="";
+            document.getElementById('app').style.display = 'block';
+            document.getElementById('home').style.display = 'none';
+            event.preventDefault();
+
+        }
+    });
+
+    searchbox1.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            searchbox.value="";
+            document.getElementById('app').style.display = 'block';
+            document.getElementById('home').style.display = 'none';
+            event.preventDefault();
+
+        }
+    });
+
+    var app = new Vue({
+        el: '#app',
+        data: {
+            eyewears: [],
+            searchQuery: '',
+            currentPage: 1,
+            itemsPerPage: 27,
+        },
+        methods: {
+            // Get all the glasses from the web service using Axios.
+            loadAllEyewear: function () {
+                var localApp = this;
+                const searchQuery = document.getElementById('searchQuery').value;
+                const searchQuery1 = document.getElementById('searchQuery1').value;
+                var query="";
+
+                var offset = (localApp.currentPage - 1) * localApp.itemsPerPage;
+
+                if (searchQuery==="" && searchQuery1 !==""){
+                    query=searchQuery1
+                }
+                else if (searchQuery1==="" && searchQuery !==""){
+                    query=searchQuery
+                }
+                else{
+
+                }
+
+                var apiEndpoint = '/glasses/' + query + '?num_items=' + localApp.itemsPerPage + '&offset=' + offset;
+
+                axios.get(apiEndpoint)
+                    .then(function (response) {
+                        localApp.eyewears = response.data.data;
+                        console.log(JSON.stringify(response.data.data));
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+            changePage: function (newPage) {
+                this.currentPage = newPage;
+                this.loadAllEyewear();
+            },
+        },
+        created: function () {
+            this.loadAllEyewear();
+            setInterval(this.loadAllEyewear, 500);
+        }
+    });
+
+    const c = document.querySelector('.pagination .container')
+    const indexs = Array.from(document.querySelectorAll('.index'))
+    let cur = -1
+    indexs.forEach((index, i) => {
+        index.addEventListener('click', (e) => {
+            // clear
+            c.className = 'container'
+            void c.offsetWidth; // Reflow
+            c.classList.add('open')
+            c.classList.add(`i${i + 1}`)
+            if (cur > i) {
+                c.classList.add('flip')
+            }
+            cur = i
+        })
+    })
+</script>
+<!--<script src="/landingPage.vue"></script>-->
+
+</body>
+</html>
+
+
+<!--<!DOCTYPE html>-->
+<!--<html>-->
+<!--<head>-->
+<!--    <link rel="stylesheet" href="/css/style.css">-->
+<!--    <title>Vue with Web Service Demo</title>-->
+
+<!--    &lt;!&ndash; Vue development version, includes helpful console warnings &ndash;&gt;-->
+<!--    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
+
+<!--    &lt;!&ndash; Axios library &ndash;&gt;-->
+<!--    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
+
+<!--</head>-->
+<!--<body>-->
+<!--<div id="app">-->
+<!--    <h1>Eyewear</h1>-->
+<!--    <input type="text" v-model="searchQuery"  placeholder="Search by ID" id="input">-->
+<!--    <button onclick="loadResult(input)">Search</button>-->
+
+
+<!--    <div class="product-grid">-->
+<!--        <a v-for="eyewear in eyewears" :key="eyewear.id" :href="'/glasses/' + eyewear.id" class="product-item">-->
+<!--            <img :src="eyewear.image_url" alt="Product Image">-->
+<!--            <div class="product-details">-->
+<!--                <b>id</b>: {{ eyewear.id }}<br>-->
+<!--                <b>name</b>: {{ eyewear.name }}<br>-->
+<!--                <b>brand</b>: {{ eyewear.brand }}<br>-->
+<!--                <b>price</b>: {{ eyewear.price }}-->
+<!--            </div>-->
+<!--        </a>-->
+<!--    </div>-->
+<!--</div>-->
+
+
+
+<!--<script>-->
+
+<!--    var app = new Vue({-->
+<!--        el: '#app',-->
+<!--        data: {-->
+<!--            eyewears: []-->
+<!--        },-->
+<!--        methods : {-->
+<!--            //Get all the glasses from the web service using Axios.-->
+<!--            loadAllEyewear: function (){-->
+<!--                var localApp = this;-->
+<!--                axios.get('/glasses')//Send GET request to glasses path-->
+<!--                    .then(function (response) {//Request successful-->
+<!--                        //Point glasses in data to returned array of glasses-->
+<!--                        localApp.eyewears = response.data.data;-->
+<!--                        console.log(JSON.stringify(response.data.data));-->
+<!--                    })-->
+<!--                    .catch(function (error) {-->
+<!--                        //Handle error-->
+<!--                        console.log(error);-->
+<!--                    });-->
+<!--            }-->
+
+
+
+<!--        },-->
+<!--        created: function(){//Vue lifecycle hook, called when data is loaded.-->
+<!--            //Load glasses from web service-->
+<!--            this.loadAllEyewear();-->
+
+<!--            //Refresh glasses every 5 seconds-->
+<!--            setInterval(this.loadAllEyewear, 1000);-->
+<!--        }-->
+<!--    })-->
+
+
+<!--    var input = new Vue({-->
+<!--        el: '#input',-->
+<!--        data: {-->
+<!--            eyewears: []-->
+<!--        },-->
+<!--        methods : {-->
+<!--            //Get all the glasses from the web service using Axios.-->
+<!--            loadResult: function (search) {-->
+<!--                var localApp = this;-->
+<!--                axios.get('/' + search)//Send GET request to glasses path-->
+<!--                    .then(function (response) {//Request successful-->
+<!--                        //Point glasses in data to returned array of glasses-->
+<!--                        localApp.eyewears = response.data.data;-->
+<!--                        console.log(JSON.stringify(response.data.data));-->
+<!--                    })-->
+<!--                    .catch(function (error) {-->
+<!--                        //Handle error-->
+<!--                        console.log(error);-->
+<!--                    });-->
+<!--            }-->
+
+<!--        }-->
+<!--    })-->
+
+<!--</script>-->
+
+<!--</body>-->
+<!--</html>-->
+
+<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
+<!--&lt;!&ndash;<html>&ndash;&gt;-->
+<!--&lt;!&ndash;<head>&ndash;&gt;-->
+<!--&lt;!&ndash;    <title>Vue with Web Service Demo</title>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    &lt;!&ndash; Vue development version, includes helpful console warnings &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    &lt;!&ndash; Axios library &ndash;&gt;&ndash;&gt;-->
+<!--&lt;!&ndash;    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>&ndash;&gt;-->
+<!--&lt;!&ndash;</head>&ndash;&gt;-->
+<!--&lt;!&ndash;<body>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <div id="app">&ndash;&gt;-->
+<!--&lt;!&ndash;        <h1>Eyewear</h1>&ndash;&gt;-->
+<!--&lt;!&ndash;        <p v-for="item in glasses">&ndash;&gt;-->
+<!--&lt;!&ndash;            <b>id</b>: {{item.id}};&ndash;&gt;-->
+<!--&lt;!&ndash;            <b>name</b>: {{item.name}};&ndash;&gt;-->
+<!--&lt;!&ndash;            <b>brand</b>: {{item.brand}};&ndash;&gt;-->
+<!--&lt;!&ndash;            <b>price</b>: {{item.price}}&ndash;&gt;-->
+<!--&lt;!&ndash;        </p>&ndash;&gt;-->
+<!--&lt;!&ndash;    </div>&ndash;&gt;-->
+
+<!--&lt;!&ndash;    <script>&ndash;&gt;-->
+
+<!--&lt;!&ndash;        var app = new Vue({&ndash;&gt;-->
+<!--&lt;!&ndash;            el: '#app',&ndash;&gt;-->
+<!--&lt;!&ndash;            data: {&ndash;&gt;-->
+<!--&lt;!&ndash;                glasses: []&ndash;&gt;-->
+<!--&lt;!&ndash;            },&ndash;&gt;-->
+<!--&lt;!&ndash;            methods : {&ndash;&gt;-->
+<!--&lt;!&ndash;                //Get all the cereals from the web service using Axios.&ndash;&gt;-->
+<!--&lt;!&ndash;                loadAllEyewear: function (){&ndash;&gt;-->
+<!--&lt;!&ndash;                    axios.get('/glasses')//Send GET request to glasses path&ndash;&gt;-->
+<!--&lt;!&ndash;                        .then(function (response) {//Request successful&ndash;&gt;-->
+<!--&lt;!&ndash;                            //Output cereals data&ndash;&gt;-->
+<!--&lt;!&ndash;                            console.log("&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; Data Received from Web Service -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;");&ndash;&gt;-->
+<!--&lt;!&ndash;                            // console.log(response.data.data);&ndash;&gt;-->
+<!--&lt;!&ndash;                            // Access each item separately and log details&ndash;&gt;-->
+<!--&lt;!&ndash;                            response.data.data.forEach(item => {&ndash;&gt;-->
+<!--&lt;!&ndash;                                console.log('ID:', item.id);&ndash;&gt;-->
+<!--&lt;!&ndash;                                console.log('Name:', item.name);&ndash;&gt;-->
+<!--&lt;!&ndash;                                console.log('Description:', item.description);&ndash;&gt;-->
+<!--&lt;!&ndash;                                // Log other properties as needed&ndash;&gt;-->
+<!--&lt;!&ndash;                                console.log('-&#45;&#45;'); // Separator for clarity&ndash;&gt;-->
+<!--&lt;!&ndash;                            });&ndash;&gt;-->
+<!--&lt;!&ndash;                        })&ndash;&gt;-->
+<!--&lt;!&ndash;                        .catch(function (error) {&ndash;&gt;-->
+<!--&lt;!&ndash;                            //Handle error&ndash;&gt;-->
+<!--&lt;!&ndash;                            console.log(error);&ndash;&gt;-->
+<!--&lt;!&ndash;                        });&ndash;&gt;-->
+<!--&lt;!&ndash;                 }&ndash;&gt;-->
+<!--&lt;!&ndash;            },&ndash;&gt;-->
+<!--&lt;!&ndash;            created: function(){//Vue lifecycle hook, called when data is loaded.&ndash;&gt;-->
+<!--&lt;!&ndash;                //Load cereals from web service&ndash;&gt;-->
+<!--&lt;!&ndash;                this.loadAllEyewear();&ndash;&gt;-->
+
+<!--&lt;!&ndash;                //Refresh cereals every 5 seconds&ndash;&gt;-->
+<!--&lt;!&ndash;                setInterval(this.loadAllEyewear, 5000);&ndash;&gt;-->
+<!--&lt;!&ndash;            }&ndash;&gt;-->
+<!--&lt;!&ndash;        })&ndash;&gt;-->
+
+<!--&lt;!&ndash;    </script>&ndash;&gt;-->
+
+<!--&lt;!&ndash;</body>&ndash;&gt;-->
+<!--&lt;!&ndash;</html>&ndash;&gt;-->

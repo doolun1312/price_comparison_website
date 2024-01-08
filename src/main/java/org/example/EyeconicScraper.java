@@ -49,6 +49,8 @@ public class EyeconicScraper extends Thread{
                     Elements price = prods.get(i).select(".product-standard-price");
 
                     Elements brand = prods.get(i).select(".productTileStyle");
+
+                    Elements model = prods.get(i).select(".product-code");
 //
 //
 //                    // Get the product link
@@ -76,6 +78,7 @@ public class EyeconicScraper extends Thread{
                         // If not found, try the other class
                         size = doc1.select(".js-frame-size-option").first();
                     }
+
 //
 //
 //
@@ -86,6 +89,7 @@ public class EyeconicScraper extends Thread{
                         // Output the data that we have downloaded
                         System.out.println("WEBSITE: " + website +
                                 " NAME: " + name.text() +
+                                " MODEL: " + model.text() +
                                 " DESCRIPTION: " + description.text() +
                                 " BRAND: " + brand.text() +
                                 " PRICE: " + price.text() +
@@ -96,7 +100,7 @@ public class EyeconicScraper extends Thread{
                 // Check if the product already exists in the database
                 if (!hibernate.searchEyewear(name.text())) {
                     //add data to database
-                    hibernate.addEyewear(name.text(), description.text(), productImage, brand.text(), size.text(), productLink, price.text());//Add data
+                    hibernate.addEyewear(name.text(), model.text(), description.text(), productImage, brand.text(), size.text(), productLink, price.text());//Add data
                 } else {
                     // Product already exists, you may want to log or handle this case
                     System.out.println("Product already exists in the database: " + name.text());

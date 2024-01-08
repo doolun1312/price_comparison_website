@@ -16,6 +16,8 @@ public class EyewearAnnotation {
     @Column(name = "name")
     private String name;
 
+    @Column(name = "model")
+    private String model;
     @Column(name = "description")
     private String description;
 
@@ -24,6 +26,7 @@ public class EyewearAnnotation {
 
     @Column(name = "brand")
     private String brand;
+
 
 
     /** Empty constructor */
@@ -46,11 +49,19 @@ public class EyewearAnnotation {
     public String getBrand() {
         return brand;
     }
+
+    public String getModel() {
+        return model;
+    }
     public void setId(int id) {
         this.id = id;
     }
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
     }
     public void setDescription(String description) {
         this.description = description;
@@ -62,10 +73,12 @@ public class EyewearAnnotation {
         this.brand = brand;
     }
 
+
+
     /** Returns a String description of the class */
     public String toString(){
         String str = "Eyewear. id: " + id + "; name: " + name + "; description: " +
-                description + "; image_url: " + image_url + "; brand: " + brand;
+                description + "; image_url: " + image_url + "; brand: " + brand + "; model: " + model;
         return str;
     }
 }
