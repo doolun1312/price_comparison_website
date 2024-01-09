@@ -407,7 +407,7 @@ nav .wrapper1{
     cursor: pointer;
     display: inline;
     margin-right: 29.5px;
-    padding: 5px;
+    padding: 10px;
     user-select: none;
     -moz-user-select: none;
 }
@@ -419,44 +419,13 @@ svg {
     position: absolute;
     top: -11px;
     transition: transform 500ms;
-    width: 46px;
+    width: 45px;
 }
 path {
     fill:none;
     stroke: #7a727a;
     stroke-dasharray: 150 150;
-    stroke-width:15;
-}
-.pagination .container.open:not(.flip) path {
-    animation: OpenRight 500ms;
-}
-.pagination .container.open.flip path {
-    animation: OpenLeft 500ms;
-}
-.pagination .container.i1 svg {
-    transform: translateX(0);
-}
-.pagination .container.i2 svg {
-    transform: translateX(58px);
-}
-.container.i3 svg {
-    transform: translateX(113px);
-}
-.pagination .container.i4 svg {
-    transform: translateX(170px);
-}
-.pagination .container.i5 svg {
-    transform: translateX(225px);
-}
-@keyframes OpenRight {
-    25% { stroke-dasharray: 100 150; }
-    60% { stroke-dasharray: 100 150; }
-    100% { stroke-dasharray: 150 150; }
-}
-@keyframes OpenLeft {
-    25% { stroke-dashoffset: -50px; }
-    60% { stroke-dashoffset: -50px; }
-    100% { stroke-dashoffset: 0; }
+    stroke-width:10;
 }
 
 #productPage{
@@ -598,7 +567,8 @@ path {
     font-family: "Jura", sans-serif;
 }
 
-#productPage2 h1 {
+#productPage2 h2 {
+    color: #7a727a;
     text-align: center;
 }
 
@@ -670,5 +640,6 @@ path {
 }
 
 #prod{
+    padding: 90px 0 0 0;
     display: none;
 }

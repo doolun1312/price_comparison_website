@@ -17,32 +17,32 @@ public class Main {
         System.out.println(rowCount);
 
         // Start the threads running only if the row count is less than or equal to 100.
-//        EyeonsScraper scraper1 = new EyeonsScraper();
+        EyeonsScraper scraper1 = new EyeonsScraper();
         EbayScraper scraper2 = new EbayScraper();
-//        EyebuydirectSraper scraper3 = new EyebuydirectSraper();
+        EyebuydirectSraper scraper3 = new EyebuydirectSraper();
         DiscountedSunglassesScraper scraper4 = new DiscountedSunglassesScraper();
-//        EyeconicScraper scraper5 = new EyeconicScraper();
+        AlensaScraper scraper5 = new AlensaScraper();
 
-//        scraper1.start();
+        scraper1.start();
         scraper2.start();
-//        scraper3.start();
+        scraper3.start();
         scraper4.start();
-//        scraper5.start();
+        scraper5.start();
 
         if (hibernate.getCount() > 50) {
-//            scraper1.stopThread();
+            scraper1.stopThread();
             scraper2.stopThread();
-//            scraper3.stopThread();
+            scraper3.stopThread();
             scraper4.stopThread();
-//            scraper5.stopThread();
+            scraper5.stopThread();
 
             // Wait for threads to finish
             try {
-//                scraper1.join();
+                scraper1.join();
                 scraper2.join();
-//                scraper3.join();
+                scraper3.join();
                 scraper4.join();
-//                scraper5.join();
+                scraper5.join();
             } catch (InterruptedException ex) {
                 System.out.println("Interrupted exception thrown: " + ex.getMessage());
             }

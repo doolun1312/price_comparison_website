@@ -70,7 +70,7 @@
 
 
 
-<div id="app">
+
 <!--    <a v-for="eyewear in eyewears" :key="eyewear.id" :href="'/glasses/' + eyewear.id" class="product-item">-->
 <!--        <img :src="eyewear.image_url" alt="Product Image">-->
 <!--        <div class="product-details">-->
@@ -81,63 +81,123 @@
 <!--        </div>-->
 <!--    </a>-->
 
-    <h1>Eyewear</h1>
+    <div id="app1">
+        <div id="app">
+            <div v-if="eyewears.length > 0">
+                <h1>Eyewear</h1>
+            <div class="product-grid">
+                    <a v-for="eyewear in eyewears" :key="eyewear.id" class="product-item" @click="getProduct(eyewear.id)" >
+                        <div class="wrapper">
+                            <div class="container">
+                                <div class="top">
+                                    <img :src="eyewear.image_url" alt="Product Image">
+                                </div>
+                                <div class="bottom">
+                                        <div class="details">
+                                            <h3>{{ eyewear.name }}</h3>
+                                            <p>{{ eyewear.price }}</p>
 
-    <div class="product-grid">
-        <a v-for="eyewear in eyewears" :key="eyewear.id" :href="'/glasses/' + eyewear.id" class="product-item">
-            <div class="wrapper">
-                <div class="container">
-                    <div class="top">
-                        <img :src="eyewear.image_url" alt="Product Image">
-                    </div>
-                    <div class="bottom">
-                            <div class="details">
-                                <h3>{{ eyewear.name }}</h3>
-                                <p>{{ eyewear.price }}</p>
+                                    </div>
+                                </div>
+                                <div class="inside">
+                                    <div class="icon"><i class="material-icons"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAlVJREFUSEvFlUuIzlEYxn+PhImm2DFCWVAmpMZKjZVckhBjMaOUJJnGYrIwcsnMapJyK1kQSiw0uUZZyGUnt0gYNNkqmnKJvM47nW/6vjP///f5vpqc1b/zf895nnPe53mOGOWhUd6fsgBmNh5YDywHFgCzAAM+Ak+BW8AVSb/yiOYCmNkK4GTctNxB3wHbJd3NKsoEMLMDgen+uGAAuATcAJ7FuYXAamAjMD3OdUo6nIKMACjafBBoBa5J8msZMcxsDLABOAPUAR2SjhYXlgCYmbO6CnwPjJskvfwXEZjZYuAh4IDNkh4U1g0DmNkk4A0wFWiTdCHd3MLxfE5S1sl3AUeA16Hx8wuNLwbYAZwI9/oKaMy6lgoA46K6nOBaSX1DZAoswzFvAq6cnZIcqOphZj3AHuC0pG0pwKfwowGYLel91bu7QcyWAPeBJ5IWpQDfohLqJP3IUU1uD7zezKYAn4EvkianAC5Lb3S9JP/OkmUlgHrgKzAoyb9LeuDdnxMV8KJGAL+Wxy4USfNSgItBYpuA3ZJ6awTYCxwKfTwf+rg5BWgDzgFvgbmS/lTpg7HBP/3ADKBF0uUUwK3u1+QFWySdrRKgHfCYcLO60X6WAEQVLANu1xAVTcCjGBVLJblUh0aW5buA7qiGVknX8zwRw67FjQVMDBJtl3S8uD4vrvcF8IOx8EOMa3f6c8AjoTGYaU1M0mnxEfIkPZaSKffgrArBdyq6u5yx/cHZKuleVlGlJ3NCYL0OWOmNC7k/M7J1tbje7wB9kn7nMfi/j34tgZeu+QtyfuYZe3ZfmwAAAABJRU5ErkJggg=="/></i></div>
+                                    <div class="contents">
+                                        <table>
+                                            <tr>
+                                                <th>Brand</th>
+                                                <th>Model</th>
+                                            </tr>
+                                            <tr>
+                                                <td>{{ eyewear.brand }}</td>
+                                                <td>{{ eyewear.model }}</td>
+                                            </tr>
 
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="inside">
-                        <div class="icon"><i class="material-icons"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAlVJREFUSEvFlUuIzlEYxn+PhImm2DFCWVAmpMZKjZVckhBjMaOUJJnGYrIwcsnMapJyK1kQSiw0uUZZyGUnt0gYNNkqmnKJvM47nW/6vjP///f5vpqc1b/zf895nnPe53mOGOWhUd6fsgBmNh5YDywHFgCzAAM+Ak+BW8AVSb/yiOYCmNkK4GTctNxB3wHbJd3NKsoEMLMDgen+uGAAuATcAJ7FuYXAamAjMD3OdUo6nIKMACjafBBoBa5J8msZMcxsDLABOAPUAR2SjhYXlgCYmbO6CnwPjJskvfwXEZjZYuAh4IDNkh4U1g0DmNkk4A0wFWiTdCHd3MLxfE5S1sl3AUeA16Hx8wuNLwbYAZwI9/oKaMy6lgoA46K6nOBaSX1DZAoswzFvAq6cnZIcqOphZj3AHuC0pG0pwKfwowGYLel91bu7QcyWAPeBJ5IWpQDfohLqJP3IUU1uD7zezKYAn4EvkianAC5Lb3S9JP/OkmUlgHrgKzAoyb9LeuDdnxMV8KJGAL+Wxy4USfNSgItBYpuA3ZJ6awTYCxwKfTwf+rg5BWgDzgFvgbmS/lTpg7HBP/3ADKBF0uUUwK3u1+QFWySdrRKgHfCYcLO60X6WAEQVLANu1xAVTcCjGBVLJblUh0aW5buA7qiGVknX8zwRw67FjQVMDBJtl3S8uD4vrvcF8IOx8EOMa3f6c8AjoTGYaU1M0mnxEfIkPZaSKffgrArBdyq6u5yx/cHZKuleVlGlJ3NCYL0OWOmNC7k/M7J1tbje7wB9kn7nMfi/j34tgZeu+QtyfuYZe3ZfmwAAAABJRU5ErkJggg=="/></i></div>
-                        <div class="contents">
-                            <table>
-                                <tr>
-                                    <th>Brand</th>
-                                    <th>Model</th>
-                                </tr>
-                                <tr>
-                                    <td>{{ eyewear.brand }}</td>
-                                    <td>{{ eyewear.model }}</td>
-                                </tr>
+                    </a>
+            </div>
+                <!-- Display a message when no records are found -->
+            </div>
+            <div v-else>
+                <br><br>
+                <p>No records found.</p>
+            </div>
 
-                            </table>
+            <div class="pagination">
+                <div class="container">
+                    <span v-for="page in pages" :key="page">
+                        <div class="index" @click="changePage(page)">{{page}}</div>
+                    </span>
+                    <svg viewBox="0 0 100 100">
+                        <path
+                                d="m 7.1428558,49.999998 c -1e-7,-23.669348 19.1877962,-42.8571447 42.8571442,-42.8571446 23.669347,0 42.857144,19.1877966 42.857144,42.8571446" />
+                    </svg>
+                    <svg viewBox="0 0 100 100">
+                        <path
+                                d="m 7.1428558,49.999998 c -1e-7,23.669347 19.1877962,42.857144 42.8571442,42.857144 23.669347,0 42.857144,-19.187797 42.857144,-42.857144" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div id="prod">
+            <div id="productPage">
+                <div class="container">
+                    <div class="images">
+                        <img id="prodImage"/>
+                    </div>
+                    <div class="product">
+                        <p id="prodModel"></p>
+                        <h1 id="prodName"></h1>
+                        <h2 id="prodPrice"></h2>
+                        <p class="desc" id="description"></p>
+                        <div class="buttons">
+                            <button class="add">Add to Cart</button>
+                            <button class="like"><span>♥</span></button>
                         </div>
                     </div>
                 </div>
             </div>
-        </a>
-    </div>
 
-    <div class="pagination">
-        <div class="container">
-            <span>
-                <div class="index" @click="changePage(1)">1</div>
-                <div class="index" @click="changePage(2)">2</div>
-                <div class="index" @click="changePage(3)">3</div>
-                <div class="index" @click="changePage(4)">4</div>
-                <div class="index" @click="changePage(5)">5</div>
-            </span>
-            <svg viewBox="0 0 100 100">
-                <path
-                        d="m 7.1428558,49.999998 c -1e-7,-23.669348 19.1877962,-42.8571447 42.8571442,-42.8571446 23.669347,0 42.857144,19.1877966 42.857144,42.8571446" />
-            </svg>
-            <svg viewBox="0 0 100 100">
-                <path
-                        d="m 7.1428558,49.999998 c -1e-7,23.669347 19.1877962,42.857144 42.8571442,42.857144 23.669347,0 42.857144,-19.187797 42.857144,-42.857144" />
-            </svg>
+            <div id="productPage2">
+                <h2>Available at:</h2>
+                <ul v-for="product in productSame" :key="product.id" >
+<!--                    <li> <b>name</b>: {{ product.name }}</li>-->
+                    <li>
+                        <div class="icon"></div>
+<!--                        <div v-if="product.url "><div>-->
+                        <a :href="product.url" class="title">{{product.name}}</a>
+<!--                        <div class="descr">{{product.url}}</div>-->
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
-<!--    <div class="product-grid">-->
+<!--        &lt;!&ndash; Your pagination component... &ndash;&gt;-->
+<!--        <pagination v-for="i of totalPages" :total-pages="totalPages" :current-page="currentPage" @change-page="changePage">-->
+<!--            <div class="pagination">-->
+<!--                <div class="container">-->
+<!--            <span>-->
+<!--                <div class="index" @click="changePage(i)">i</div>-->
+<!--            </span>-->
+<!--                    <svg viewBox="0 0 100 100">-->
+<!--                        <path-->
+<!--                                d="m 7.1428558,49.999998 c -1e-7,-23.669348 19.1877962,-42.8571447 42.8571442,-42.8571446 23.669347,0 42.857144,19.1877966 42.857144,42.8571446" />-->
+<!--                    </svg>-->
+<!--                    <svg viewBox="0 0 100 100">-->
+<!--                        <path-->
+<!--                                d="m 7.1428558,49.999998 c -1e-7,23.669347 19.1877962,42.857144 42.8571442,42.857144 23.669347,0 42.857144,-19.187797 42.857144,-42.857144" />-->
+<!--                    </svg>-->
+<!--                </div>-->
+<!--            </div>-->
+
+
+    <!--    <div class="product-grid">-->
 <!--        <a v-for="eyewear in eyewears" :key="eyewear.id" :href="'/glasses/' + eyewear.id" class="product-item">-->
 <!--            <img :src="eyewear.image_url" alt="Product Image">-->
 <!--            <div class="product-details">-->
@@ -148,75 +208,20 @@
 <!--            </div>-->
 <!--        </a>-->
 <!--    </div>-->
-</div>
 
-<div id="prod">
-    <div id="productPage">
-        <div class="container">
-            <div class="images">
-                <img src="http://mistillas.cl/wp-content/uploads/2018/04/Nike-Epic-React-Flyknit-%E2%80%9CPearl-Pink%E2%80%9D-01.jpg" />
-            </div>
-            <div class="slideshow-buttons">
-                <div class="one"></div>
-                <div class="two"></div>
-                <div class="three"></div>
-                <div class="four"></div>
-            </div>
-            <p class="pick">choose size</p>
-            <div class="sizes">
-                <div class="size">5</div>
-                <div class="size">6</div>
-                <div class="size">7</div>
-                <div class="size">8</div>
-                <div class="size">9</div>
-                <div class="size">10</div>
-                <div class="size">11</div>
-                <div class="size">12</div>
-            </div>
-            <div class="product">
-                <p>Women's Running Shoe</p>
-                <h1>Nike Epic React Flyknit</h1>
-                <h2>$150</h2>
-                <p class="desc">The Nike Epic React Flyknit foam cushioning is responsive yet light-weight, durable yet soft. This creates a sensation that not only enhances the feeling of moving forward, but makes running feel fun, too.</p>
-                <div class="buttons">
-                    <button class="add">Add to Cart</button>
-                    <button class="like"><span>♥</span></button>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div id="productPage2">
-        <h1>UL icon cards</h1>
-        <ul>
-            <li style="--accent-color:#60c5a6">
-                <div class="icon"><i class="fa-brands fa-codepen"></i></div>
-                <div class="title">Codepen</div>
-                <div class="descr">Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta, impedit?</div>
-            </li>
-            <li style="--accent-color:#f20071">
-                <div class="icon"><i class="fa-brands fa-html5"></i></div>
-                <div class="title">HTML 5</div>
-                <div class="descr">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-            </li>
-            <li style="--accent-color:#FCBA35">
-                <div class="icon"><i class="fa-brands fa-css3"></i></div>
-                <div class="title">CSS 3</div>
-                <div class="descr">Lorem ipsum dolor sit.</div>
-            </li>
-            <li style="--accent-color:#DAE438">
-                <div class="icon"><i class="fa-brands fa-js"></i></div>
-                <div class="title">Javascript</div>
-                <div class="descr">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor laboriosam odio alias.</div>
-            </li>
-            <li style="--accent-color:#994D7F">
-                <div class="icon"><i class="fa-brands fa-github"></i></div>
-                <div class="title">Github</div>
-                <div class="descr">Lorem ipsum dolor sit amet consectetur adipisicing elit.</div>
-            </li>
-        </ul>
-    </div>
-</div>
 
+
+
+    <!--        <a v-for="eyewear in eyewears" :key="eyewear.id" :href="'/glasses/' + eyewear.id" class="product-item">-->
+    <!--            <img :src="eyewear.image_url" alt="Product Image">-->
+    <!--            <div class="product-details">-->
+    <!--                <b>id</b>: {{ eyewear.id }}<br>-->
+    <!--                <b>name</b>: {{ eyewear.name }}<br>-->
+    <!--                <b>brand</b>: {{ eyewear.brand }}<br>-->
+    <!--                <b>price</b>: {{ eyewear.price }}-->
+    <!--            </div>-->
+    <!--        </a>-->
+    <!--    </div>-->
 
 <!-- Link to api.js -->
 
@@ -249,6 +254,7 @@
         var homeLink = document.getElementById('homeLink');
         var appElement = document.getElementById('app');
         var searchbox=document.getElementById('searchQuery1');
+        var prod = document.getElementById("prod");
 
         // Get the #app element
         var homeElement = document.getElementById('home');
@@ -262,6 +268,7 @@
             homeElement.style.display = 'block';
             searchbox.value="";
             appElement.style.display='none';
+            prod.style.display="none";
         });
     });
 
@@ -274,6 +281,7 @@
         // Get the #app element
         var appElement = document.getElementById('app');
         var homeElement = document.getElementById('home');
+        var prod = document.getElementById("prod");
 
         var search = document.getElementById('searchQuery');
         var search1=document.getElementById('searchQuery1');
@@ -289,33 +297,9 @@
             // Toggle the display property of the #app element
             appElement.style.display = 'block';
             homeElement.style.display = 'none';
+            prod.style.display="none";
         });
     });
-
-    function search(){
-        const searchbox = document.getElementById('searchQuery')
-
-        // Get the search query from the input field
-        const searchQuery = document.getElementById('searchQuery').value;
-
-
-        // Replace 'YOUR_API_ENDPOINT' with your actual API endpoint
-        const apiEndpoint = '/glasses/';
-
-        // Append the search query to the API endpoint
-        const fullApiEndpoint = `${apiEndpoint}${searchQuery}`;
-
-        // Make the Axios GET request
-        axios.get(fullApiEndpoint)
-            .then(response => {
-                // Handle the successful response
-                console.log(response.data);
-            })
-            .catch(error => {
-                // Handle errors
-                console.error('Error:', error);
-            });
-    }
 
     // Listen for the Enter key press
     const searchbox=document.getElementById('searchQuery');
@@ -326,6 +310,7 @@
             searchbox1.value="";
             document.getElementById('app').style.display = 'block';
             document.getElementById('home').style.display = 'none';
+            document.getElementById("prod").style.display="none";
             event.preventDefault();
 
         }
@@ -341,13 +326,21 @@
         }
     });
 
+    // var prod = new Vue({
+    //     el: '#prod',
+    //
+    // })
+
     var app = new Vue({
-        el: '#app',
+        el: '#app1',
         data: {
             eyewears: [],
+            productSame: [],
+            pages: [],
             searchQuery: '',
             currentPage: 1,
             itemsPerPage: 27,
+            totalRows: 0,
         },
         methods: {
             // Get all the glasses from the web service using Axios.
@@ -355,19 +348,27 @@
                 var localApp = this;
                 const searchQuery = document.getElementById('searchQuery').value;
                 const searchQuery1 = document.getElementById('searchQuery1').value;
-                var query="";
+                var query = "";
 
                 var offset = (localApp.currentPage - 1) * localApp.itemsPerPage;
 
-                if (searchQuery==="" && searchQuery1 !==""){
-                    query=searchQuery1
-                }
-                else if (searchQuery1==="" && searchQuery !==""){
-                    query=searchQuery
-                }
-                else{
+                if (searchQuery === "" && searchQuery1 !== "") {
+                    query = searchQuery1
+                } else if (searchQuery1 === "" && searchQuery !== "") {
+                    query = searchQuery
+                } else {
 
                 }
+
+                var api1 = '/glasses/' + query;
+
+                axios.get(api1)
+                    .then(function (response) {
+                        localApp.totalRows = response.data.data.length;
+                        console.log(response.data.data.length);
+                        console.log(localApp.totalRows);
+                        localApp.totalPages();
+                    })
 
                 var apiEndpoint = '/glasses/' + query + '?num_items=' + localApp.itemsPerPage + '&offset=' + offset;
 
@@ -384,27 +385,83 @@
                 this.currentPage = newPage;
                 this.loadAllEyewear();
             },
+            getProduct: function (id) {
+                var app = document.getElementById("app");
+                var prod = document.getElementById("prod");
+                var localApp = this;
+                var apiEndpoint = '/glasses/' + id;
+                app.style.display = 'none';
+                prod.style.display = 'block';
+
+                axios.get(apiEndpoint)
+                    .then(function (response) {
+                        localApp.productSame = response.data;
+                        console.log(JSON.stringify(this.productSame));
+                        // localApp.eyewears = response.data.data;
+                        console.log(JSON.stringify(response.data[0].description));
+                        const prodImage = document.getElementById("prodImage");
+                        const prodModel = document.getElementById("prodModel");
+                        const prodName = document.getElementById("prodName");
+                        const prodPrice = document.getElementById("prodPrice");
+                        const prodDesc = document.getElementById("description");
+                        prodImage.src = response.data[0].image_url;
+                        prodModel.innerHTML = response.data[0].model;
+                        prodName.innerHTML = response.data[0].name;
+                        prodPrice.innerHTML = response.data[0].price;
+                        prodDesc.innerHTML = response.data[0].description;
+
+                    })
+                    .catch(function (error) {
+                        console.log(error);
+                    });
+            },
+            totalPages: function () {
+                var total = Math.ceil(this.totalRows / this.itemsPerPage);
+                var i = 0;
+                const temp = [];
+                while (i < total) {
+                    temp.push(i+1);
+                    i++;
+                }
+                this.pages = temp;
+                console.log(this.itemsPerPage);
+                const c = document.querySelector('.pagination .container')
+                const indexs = Array.from(document.querySelectorAll('.index'))
+                const svg = Array.from(document.querySelectorAll('svg'))
+                let cur = -1
+                indexs.forEach((index, i) => {
+                    index.addEventListener('click', (e) => {
+                        svg[0].style = "transform: translateX(" + (32 * i) + "px)";
+                        svg[1].style = "transform: translateX(" + (32 * i) + "px)";
+                    })
+                })
+            },
         },
+
         created: function () {
             this.loadAllEyewear();
+            // this.totalPages();
             setInterval(this.loadAllEyewear, 500);
         }
     });
 
     const c = document.querySelector('.pagination .container')
     const indexs = Array.from(document.querySelectorAll('.index'))
+    const svg = Array.from(document.querySelectorAll('svg'))
     let cur = -1
     indexs.forEach((index, i) => {
         index.addEventListener('click', (e) => {
+            svg[0].style="transform: translateX("+(20*i)+"px)";
+            svg[1].style="transform: translateX("+(20*i)+"px)";
             // clear
-            c.className = 'container'
-            void c.offsetWidth; // Reflow
-            c.classList.add('open')
-            c.classList.add(`i${i + 1}`)
-            if (cur > i) {
-                c.classList.add('flip')
-            }
-            cur = i
+        //     c.className = 'container'
+        //     void c.offsetWidth; // Reflow
+        //     c.classList.add('open')
+        //     c.classList.add(`i${i + 1}`)
+        //     if (cur > i) {
+        //         c.classList.add('flip')
+        //     }
+        //     cur = i
         })
     })
 </script>
@@ -412,171 +469,3 @@
 
 </body>
 </html>
-
-
-<!--<!DOCTYPE html>-->
-<!--<html>-->
-<!--<head>-->
-<!--    <link rel="stylesheet" href="/css/style.css">-->
-<!--    <title>Vue with Web Service Demo</title>-->
-
-<!--    &lt;!&ndash; Vue development version, includes helpful console warnings &ndash;&gt;-->
-<!--    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>-->
-
-<!--    &lt;!&ndash; Axios library &ndash;&gt;-->
-<!--    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>-->
-
-<!--</head>-->
-<!--<body>-->
-<!--<div id="app">-->
-<!--    <h1>Eyewear</h1>-->
-<!--    <input type="text" v-model="searchQuery"  placeholder="Search by ID" id="input">-->
-<!--    <button onclick="loadResult(input)">Search</button>-->
-
-
-<!--    <div class="product-grid">-->
-<!--        <a v-for="eyewear in eyewears" :key="eyewear.id" :href="'/glasses/' + eyewear.id" class="product-item">-->
-<!--            <img :src="eyewear.image_url" alt="Product Image">-->
-<!--            <div class="product-details">-->
-<!--                <b>id</b>: {{ eyewear.id }}<br>-->
-<!--                <b>name</b>: {{ eyewear.name }}<br>-->
-<!--                <b>brand</b>: {{ eyewear.brand }}<br>-->
-<!--                <b>price</b>: {{ eyewear.price }}-->
-<!--            </div>-->
-<!--        </a>-->
-<!--    </div>-->
-<!--</div>-->
-
-
-
-<!--<script>-->
-
-<!--    var app = new Vue({-->
-<!--        el: '#app',-->
-<!--        data: {-->
-<!--            eyewears: []-->
-<!--        },-->
-<!--        methods : {-->
-<!--            //Get all the glasses from the web service using Axios.-->
-<!--            loadAllEyewear: function (){-->
-<!--                var localApp = this;-->
-<!--                axios.get('/glasses')//Send GET request to glasses path-->
-<!--                    .then(function (response) {//Request successful-->
-<!--                        //Point glasses in data to returned array of glasses-->
-<!--                        localApp.eyewears = response.data.data;-->
-<!--                        console.log(JSON.stringify(response.data.data));-->
-<!--                    })-->
-<!--                    .catch(function (error) {-->
-<!--                        //Handle error-->
-<!--                        console.log(error);-->
-<!--                    });-->
-<!--            }-->
-
-
-
-<!--        },-->
-<!--        created: function(){//Vue lifecycle hook, called when data is loaded.-->
-<!--            //Load glasses from web service-->
-<!--            this.loadAllEyewear();-->
-
-<!--            //Refresh glasses every 5 seconds-->
-<!--            setInterval(this.loadAllEyewear, 1000);-->
-<!--        }-->
-<!--    })-->
-
-
-<!--    var input = new Vue({-->
-<!--        el: '#input',-->
-<!--        data: {-->
-<!--            eyewears: []-->
-<!--        },-->
-<!--        methods : {-->
-<!--            //Get all the glasses from the web service using Axios.-->
-<!--            loadResult: function (search) {-->
-<!--                var localApp = this;-->
-<!--                axios.get('/' + search)//Send GET request to glasses path-->
-<!--                    .then(function (response) {//Request successful-->
-<!--                        //Point glasses in data to returned array of glasses-->
-<!--                        localApp.eyewears = response.data.data;-->
-<!--                        console.log(JSON.stringify(response.data.data));-->
-<!--                    })-->
-<!--                    .catch(function (error) {-->
-<!--                        //Handle error-->
-<!--                        console.log(error);-->
-<!--                    });-->
-<!--            }-->
-
-<!--        }-->
-<!--    })-->
-
-<!--</script>-->
-
-<!--</body>-->
-<!--</html>-->
-
-<!--&lt;!&ndash;<!DOCTYPE html>&ndash;&gt;-->
-<!--&lt;!&ndash;<html>&ndash;&gt;-->
-<!--&lt;!&ndash;<head>&ndash;&gt;-->
-<!--&lt;!&ndash;    <title>Vue with Web Service Demo</title>&ndash;&gt;-->
-
-<!--&lt;!&ndash;    &lt;!&ndash; Vue development version, includes helpful console warnings &ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>&ndash;&gt;-->
-
-<!--&lt;!&ndash;    &lt;!&ndash; Axios library &ndash;&gt;&ndash;&gt;-->
-<!--&lt;!&ndash;    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>&ndash;&gt;-->
-<!--&lt;!&ndash;</head>&ndash;&gt;-->
-<!--&lt;!&ndash;<body>&ndash;&gt;-->
-
-<!--&lt;!&ndash;    <div id="app">&ndash;&gt;-->
-<!--&lt;!&ndash;        <h1>Eyewear</h1>&ndash;&gt;-->
-<!--&lt;!&ndash;        <p v-for="item in glasses">&ndash;&gt;-->
-<!--&lt;!&ndash;            <b>id</b>: {{item.id}};&ndash;&gt;-->
-<!--&lt;!&ndash;            <b>name</b>: {{item.name}};&ndash;&gt;-->
-<!--&lt;!&ndash;            <b>brand</b>: {{item.brand}};&ndash;&gt;-->
-<!--&lt;!&ndash;            <b>price</b>: {{item.price}}&ndash;&gt;-->
-<!--&lt;!&ndash;        </p>&ndash;&gt;-->
-<!--&lt;!&ndash;    </div>&ndash;&gt;-->
-
-<!--&lt;!&ndash;    <script>&ndash;&gt;-->
-
-<!--&lt;!&ndash;        var app = new Vue({&ndash;&gt;-->
-<!--&lt;!&ndash;            el: '#app',&ndash;&gt;-->
-<!--&lt;!&ndash;            data: {&ndash;&gt;-->
-<!--&lt;!&ndash;                glasses: []&ndash;&gt;-->
-<!--&lt;!&ndash;            },&ndash;&gt;-->
-<!--&lt;!&ndash;            methods : {&ndash;&gt;-->
-<!--&lt;!&ndash;                //Get all the cereals from the web service using Axios.&ndash;&gt;-->
-<!--&lt;!&ndash;                loadAllEyewear: function (){&ndash;&gt;-->
-<!--&lt;!&ndash;                    axios.get('/glasses')//Send GET request to glasses path&ndash;&gt;-->
-<!--&lt;!&ndash;                        .then(function (response) {//Request successful&ndash;&gt;-->
-<!--&lt;!&ndash;                            //Output cereals data&ndash;&gt;-->
-<!--&lt;!&ndash;                            console.log("&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45; Data Received from Web Service -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;");&ndash;&gt;-->
-<!--&lt;!&ndash;                            // console.log(response.data.data);&ndash;&gt;-->
-<!--&lt;!&ndash;                            // Access each item separately and log details&ndash;&gt;-->
-<!--&lt;!&ndash;                            response.data.data.forEach(item => {&ndash;&gt;-->
-<!--&lt;!&ndash;                                console.log('ID:', item.id);&ndash;&gt;-->
-<!--&lt;!&ndash;                                console.log('Name:', item.name);&ndash;&gt;-->
-<!--&lt;!&ndash;                                console.log('Description:', item.description);&ndash;&gt;-->
-<!--&lt;!&ndash;                                // Log other properties as needed&ndash;&gt;-->
-<!--&lt;!&ndash;                                console.log('-&#45;&#45;'); // Separator for clarity&ndash;&gt;-->
-<!--&lt;!&ndash;                            });&ndash;&gt;-->
-<!--&lt;!&ndash;                        })&ndash;&gt;-->
-<!--&lt;!&ndash;                        .catch(function (error) {&ndash;&gt;-->
-<!--&lt;!&ndash;                            //Handle error&ndash;&gt;-->
-<!--&lt;!&ndash;                            console.log(error);&ndash;&gt;-->
-<!--&lt;!&ndash;                        });&ndash;&gt;-->
-<!--&lt;!&ndash;                 }&ndash;&gt;-->
-<!--&lt;!&ndash;            },&ndash;&gt;-->
-<!--&lt;!&ndash;            created: function(){//Vue lifecycle hook, called when data is loaded.&ndash;&gt;-->
-<!--&lt;!&ndash;                //Load cereals from web service&ndash;&gt;-->
-<!--&lt;!&ndash;                this.loadAllEyewear();&ndash;&gt;-->
-
-<!--&lt;!&ndash;                //Refresh cereals every 5 seconds&ndash;&gt;-->
-<!--&lt;!&ndash;                setInterval(this.loadAllEyewear, 5000);&ndash;&gt;-->
-<!--&lt;!&ndash;            }&ndash;&gt;-->
-<!--&lt;!&ndash;        })&ndash;&gt;-->
-
-<!--&lt;!&ndash;    </script>&ndash;&gt;-->
-
-<!--&lt;!&ndash;</body>&ndash;&gt;-->
-<!--&lt;!&ndash;</html>&ndash;&gt;-->
