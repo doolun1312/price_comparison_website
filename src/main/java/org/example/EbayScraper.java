@@ -8,6 +8,9 @@ import org.jsoup.select.Elements;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Ebay scraper.
+ */
 public class EbayScraper extends Thread{
 
     private int crawlDelay = 1;
@@ -15,6 +18,9 @@ public class EbayScraper extends Thread{
     //Allows us to shut down our application cleanly
     volatile private boolean runThread = false;
 
+    /**
+     * Instantiates a new Ebay scraper.
+     */
     public EbayScraper() {
         glassestoSearch.add("RX5228");
         glassestoSearch.add("VO5286");
@@ -52,6 +58,7 @@ public class EbayScraper extends Thread{
                 for (String glasstoSearch : glassestoSearch) {
                     // Modify the itemName to use the current brand
                     Document doc = Jsoup.connect("https://www.ebay.com/sch/i.html?_from=R40&_trksid=p2380057.m570.l1313&_nkw=" + glasstoSearch + "&_sacat=0&_pgn=1").get();
+                    String website = "Ebay";
                     Elements prods = doc.select(".s-item");
                     //Get the product description
                     Elements name = prods.get(1).select(".s-item__title");
@@ -114,7 +121,7 @@ public class EbayScraper extends Thread{
                     } else {
 
                         // Output the data that we have downloaded
-                        System.out.println("WEBSITE: Ebay" +
+                        System.out.println("WEBSITE: " + website +
                                 " NAME: " + name.text() +
                                 " MODEL: " + model +
                                 " DESCRIPTION: " + description.text() +
@@ -127,7 +134,7 @@ public class EbayScraper extends Thread{
                         // Check if the product already exists in the database
                         if (!hibernate.searchEyewear(name.text())) {
                             //add data to database
-                            hibernate.addEyewear(name.text(), model, description.text(), productImage, brand, (size + size1), productLink, price1.text());//Add data
+                            hibernate.addEyewear(website, name.text(), model, description.text(), productImage, brand, (size + size1), productLink, price1.text());//Add data
                         } else {
                             // Product already exists, you may want to log or handle this case
                             System.out.println("Product already exists in the database: " + name.text());
@@ -222,7 +229,7 @@ public class EbayScraper extends Thread{
                         // Check if the product already exists in the database
                         if (!hibernate.searchEyewear(name.text())) {
                             //add data to database
-                            hibernate.addEyewear(name.text(), model, description.text(), productImage, brand, (size + size1), productLink, price1.text());//Add data
+                            hibernate.addEyewear(website, name.text(), model, description.text(), productImage, brand, (size + size1), productLink, price1.text());//Add data
                         } else {
                             // Product already exists, you may want to log or handle this case
                             System.out.println("Product already exists in the database: " + name.text());
@@ -233,7 +240,7 @@ public class EbayScraper extends Thread{
                 //Shut down Hibernate
                 hibernate.shutDown();
 
-                if (page > 10) {
+                if (page > 2) {
                     // No next page, stop scraping
                     stopThread();
                 } else {
@@ -257,7 +264,10 @@ public class EbayScraper extends Thread{
         }
     }
 
-    //Other classes can use this method to terminate the thread.
+    /**
+     * Stop thread.
+     */
+//Other classes can use this method to terminate the thread.
     public void stopThread(){
         runThread = false;
     }

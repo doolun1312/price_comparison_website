@@ -2,31 +2,53 @@ package org.example;
 
 import java.util.List;
 
+/**
+ * The type Web scraper manager.
+ */
 public class WebScraperManager {
     private static List<Thread> scraperList;
 
-    //Empty constructor
+    /**
+     * Instantiates a new Web scraper manager.
+     */
+//Empty constructor
     WebScraperManager() {
     }
 
-    //Getter
+    /**
+     * Gets scraper list.
+     *
+     * @return the scraper list
+     */
+//Getter
     public static List<Thread> getScraperList() {
         return scraperList;
     }
 
-    //Setter
+    /**
+     * Sets scraper list.
+     *
+     * @param sList the s list
+     */
+//Setter
     public static void setScraperList(List<Thread> sList) {
         scraperList = sList;
     }
 
-    //Start TVScrapers
+    /**
+     * Start threads.
+     */
+//Start TVScrapers
     public void startThreads() {
         for (Thread TVScraper : scraperList) {
             TVScraper.start();
         }
     }
 
-    //Join TVScrapers
+    /**
+     * Join threads.
+     */
+//Join TVScrapers
     public void joinThreads() {
         for (Thread TVScraper : scraperList) {
 

@@ -33,10 +33,14 @@ app.get('/glasses');
 app.get('/glasses/*');
 // app.get('/*');
 
+
+
 //Start the app listening on port 8080
 app.listen(8080, () => {
     console.log('Server is running on port 8080');
 });
+
+module.exports = app;
 
 /* Handles GET requests sent to web service.
    Processes path and query string and calls appropriate functions to
@@ -189,7 +193,7 @@ function getSame(response, id) {
             return;
         }
 
-        var sql = "SELECT eyewear.id, eyewear.name, eyewear.model, eyewear.description, eyewear.image_url, eyewear.brand, frame.size, comparison.id, comparison.url, comparison.price " +
+        var sql = "SELECT eyewear.id, eyewear.name, eyewear.model, eyewear.description, eyewear.image_url, eyewear.brand, frame.size, frame.website, comparison.id, comparison.url, comparison.price " +
             "FROM ((eyewear INNER JOIN frame ON frame.eyewear_id=eyewear.id) " +
             "INNER JOIN comparison ON comparison.frame_id=frame.id) " +
             "WHERE eyewear.brand = '" + result1[0].brand + "' AND eyewear.model LIKE CONCAT('%', '" + result1[0].model + "', '%')";

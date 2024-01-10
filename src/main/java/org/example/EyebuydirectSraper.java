@@ -4,6 +4,9 @@ import org.jsoup.Jsoup;
         import org.jsoup.nodes.Document;
         import org.jsoup.select.Elements;
 
+/**
+ * The type Eyebuydirect sraper.
+ */
 public class EyebuydirectSraper extends Thread{
 
     private int crawlDelay = 1;
@@ -122,7 +125,7 @@ public class EyebuydirectSraper extends Thread{
                         // Check if the product already exists in the database
                         if (!hibernate.searchEyewear(name.text())) {
                             //add data to database
-                            hibernate.addEyewear(name.text(), model, description.text(), productImage, brand, size.text(), productLink, price.text());//Add data
+                            hibernate.addEyewear(website, name.text(), model, description.text(), productImage, brand, size.text(), productLink, price.text());//Add data
                         } else {
                             // Product already exists, you may want to log or handle this case
                             System.out.println("Product already exists in the database: " + name.text());
@@ -133,7 +136,7 @@ public class EyebuydirectSraper extends Thread{
                 //Shut down Hibernate
                 hibernate.shutDown();
 
-                if (page>10) {
+                if (page>3) {
                     // No next page, stop scraping
                     stopThread();
                 } else {
@@ -157,7 +160,10 @@ public class EyebuydirectSraper extends Thread{
         }
     }
 
-    //Other classes can use this method to terminate the thread.
+    /**
+     * Stop thread.
+     */
+//Other classes can use this method to terminate the thread.
     public void stopThread(){
         runThread = false;
     }

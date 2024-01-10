@@ -152,29 +152,51 @@
                         <img id="prodImage"/>
                     </div>
                     <div class="product">
-                        <p id="prodModel"></p>
-                        <h1 id="prodName"></h1>
-                        <h2 id="prodPrice"></h2>
+                        <p id="prodModel"></p><br>
+                        <h1 id="prodName"></h1><br>
                         <p class="desc" id="description"></p>
-                        <div class="buttons">
-                            <button class="add">Add to Cart</button>
-                            <button class="like"><span>♥</span></button>
-                        </div>
                     </div>
                 </div>
             </div>
 
+<!--            <div class="container">-->
+<!--                <ul class="responsive-table">-->
+<!--                    <li class="table-row">-->
+<!--                        <div class="col col-1" data-label="Job Id">42235</div>-->
+<!--                        <div class="col col-2" data-label="Customer Name">John Doe</div>-->
+<!--                        <div class="col col-3" data-label="Amount">$350</div>-->
+<!--                        <div class="col col-4" data-label="Payment Status">Pending</div>-->
+<!--                    </li>-->
+<!--                </ul>-->
+<!--            </div>-->
+
             <div id="productPage2">
                 <h2>Available at:</h2>
-                <ul v-for="product in productSame" :key="product.id" >
-<!--                    <li> <b>name</b>: {{ product.name }}</li>-->
-                    <li>
-                        <div class="icon"></div>
-<!--                        <div v-if="product.url "><div>-->
-                        <a :href="product.url" class="title">{{product.name}}</a>
-<!--                        <div class="descr">{{product.url}}</div>-->
-                    </li>
-                </ul>
+                <div class="container">
+                    <ul v-for="product in productSame" :key="product.id" class="responsive-table">
+    <!--                    <li> <b>name</b>: {{ product.name }}</li>-->
+                        <li class="table-row">
+                            <div v-if="product.website === 'Alensa'">
+                                <div class="col col-1" >{{product.website}}<br><img src="./assets/alensaLogo.png" alt="alensa logo"></div>
+                            </div>
+                            <div v-else-if="product.website === 'DiscountedSunglasses'">
+                                <div class="col col-1" >{{product.website}}<br><img src="./assets/discountedLogo.jpg" alt="discounted logo"></div>
+                            </div>
+                            <div v-else-if="product.website === 'Ebay'">
+                                <div class="col col-1" >{{product.website}}<br><img src="./assets/ebayLogo.png" alt="ebay logo"></div>
+                            </div>
+                            <div v-else-if="product.website === 'Eyebuydirect'">
+                                <div class="col col-1" >{{product.website}}<br><img src="./assets/eyebuydirectLogo.jpeg" alt="eyebuydirect logo"></div>
+                            </div>
+                            <div v-else-if="product.website === 'Eyeons'">
+                                <div class="col col-1" >{{product.website}}<br><img src="./assets/eyeonsLogo.jpeg" alt="eyeons logo"></div>
+                            </div>
+                            <div class="col col-2">{{product.name}}</div>
+                            <div class="col col-3">{{product.price}}</div>
+                            <a :href="product.url" class="col col-4" style="display: grid"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACQAAAAkCAYAAADhAJiYAAAAAXNSR0IArs4c6QAABMhJREFUWEftmFtoHFUYx//fpNm0ddkqqKhFUmy9QFW8PAgVfFBERMGCtSC24q21VCPd2ZZkzrT2tGbOmCaZrQasREUIWi2pV0TEB8UHKYIIfVCIadNiWyM1Ks0WaWYvn53pTJhsdndmYx+KeGBf9ruc3/zPme98ZwgX2KALjAf/CSAyc+adDH6UmO5g8GUAvJ83fgdwEsB3XOF37d32gWZXILFCUsr57in3ORA6ALQnnGiMmPKTpck3BgYGppLEJAIyssbTRPQygEuTJK32YfBJjbRNVr/1Xlx8LJCpm70M3lyV6C8C7a+g8jEIY0UqHktPpVtKLaXFZa28VIO2ksGPAMhE45h5m523uxtBNQIioYshAGsiCY4Rk2pd1PqmlLLUKHFHR0dbZl5mHQgmg6+Y9mW8ovJqU73YukAiJ/aAsSEMZPBwW6ZtjZTSjZM9apfr5cJiuriPwQ9G/t+hHCVr5akJZOqmzuD+SECPclRXMyBVviRy4rXoAwJYqxz1TnXOWUCdnZ2LWootJwBcFDh/oBy16l/A+KFSSs2ddD8HcF+QazyVSS2pVnwWkNDFTgDb/CDGaKFUuCnpKxsHLTtkZqp1apRAl59Lzxttx94TjZsBJKVMuZOuV9gWeU7EtNLKW5/ETeTZhS62K0ftiPM1s+YGJg4hxpSjltYFEpvFA6jgs8DhJ+Wo5XEThPazQMzgLbZj9zWKkVLOcyfd8bCmlVG+pcfpORjGzFBI6OJtAE8ExpeUo15sBihYhlioRvPMBMqKgyDc7Ceu8IpmziJPoRA+TimRFatB2OdvC9AXlmPdX0+hXwFc6RnLpXJ7z6s9v1QrJHRRs36cfYbtUV8mNu1+W9VSuEvvulWD9kOg6I+2Y99YD6jiQwOYOD2RGhwcLNYAmlYibjnrKdXV1XWJ5mp/BvGnlKMurgd0Oqw/5wOIQH2WY22pBpcbZdqd7xaC/wvKUdNnXvWmHgWwzHPUWrRl3b3dh+e6ZAAs5aittVQ0dOM6Ao34NsKI6lc31FPoGwB3Bca7laO+jluW6GufeFPnxL1gfOnvIeav7Lx9T22gnOgDIxfs/l2WY3U2CxT3hnn5DN3IEyg88W3lKFETyNTNFQz+NjD+rBx1fTNASWC8fEIXRwAs8XNXcLvarfw37pwQM4fXAx0HcJUvJ/HDdr/9YRIoI2tsjWu+fHVyxlpi8vosbxxRjrommn/W4WroxmYC9QZOhwvFwvLzdriulwvdtHsorHWxh6sHkc1mFyygBV5B9PtnrzGzHXt1EpVifMjUzU/DRo1Av7VmWttj249g0z1LoNcjEzR1rtUCM3RjgEDPT9sYj6m82lvtW7eFNXSjn0B6JGBo4vTEM7WqdyNl/OvTpPs+gIdCv0bNfsNbh9DFWwCeikx4lJl3Hjp+aGh4eLjcCCRs8pnYa30XR5TJq7yKPuiMNLHXIKEL79piVkX9AcZHIOzXStrRM61njqf/TlMpVbq6rJWv1VhbxcSeIjOvQQn6pVggf09ljSeJaNdcL4oATjDxC0lKSCIgD8rfCwV3XVDJk12lCSNg7EplUkNx97hwBRIDRZbM/9gAxuMAbot8bPDaEu9jwzgYBwi018pb3zdbLuYC1OwcTfn/DxQn1z+OHglDRw8bvQAAAABJRU5ErkJggg=="/></a>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
@@ -402,12 +424,10 @@
                         const prodImage = document.getElementById("prodImage");
                         const prodModel = document.getElementById("prodModel");
                         const prodName = document.getElementById("prodName");
-                        const prodPrice = document.getElementById("prodPrice");
                         const prodDesc = document.getElementById("description");
                         prodImage.src = response.data[0].image_url;
                         prodModel.innerHTML = response.data[0].model;
                         prodName.innerHTML = response.data[0].name;
-                        prodPrice.innerHTML = response.data[0].price;
                         prodDesc.innerHTML = response.data[0].description;
 
                     })
@@ -445,25 +465,7 @@
         }
     });
 
-    const c = document.querySelector('.pagination .container')
-    const indexs = Array.from(document.querySelectorAll('.index'))
-    const svg = Array.from(document.querySelectorAll('svg'))
-    let cur = -1
-    indexs.forEach((index, i) => {
-        index.addEventListener('click', (e) => {
-            svg[0].style="transform: translateX("+(20*i)+"px)";
-            svg[1].style="transform: translateX("+(20*i)+"px)";
-            // clear
-        //     c.className = 'container'
-        //     void c.offsetWidth; // Reflow
-        //     c.classList.add('open')
-        //     c.classList.add(`i${i + 1}`)
-        //     if (cur > i) {
-        //         c.classList.add('flip')
-        //     }
-        //     cur = i
-        })
-    })
+
 </script>
 <!--<script src="/landingPage.vue"></script>-->
 

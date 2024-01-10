@@ -10,22 +10,27 @@ import org.hibernate.query.Query;
 import java.util.List;
 
 
-/** Simple Hibernate example that uses annotation to specify the mapping between
- *  a eyewear object and the eyeawear table in the coursework1 database. */
-
+/**
+ * Simple Hibernate example that uses annotation to specify the mapping between
+ * a eyewear object and the eyeawear table in the coursework1 database.
+ */
 public class Hibernate_Session {
 
     //Creates new Sessions when we need to interact with the database
     private SessionFactory sessionFactory;
 
 
-    /** Empty constructor */
+    /**
+     * Empty constructor
+     */
     Hibernate_Session() {
     }
 
 
-    /** Sets up the session factory.
-     *  Call this method first.  */
+    /**
+     * Sets up the session factory.
+     * Call this method first.
+     */
     public void init(){
         try {
             //Create a builder for the standard service registry
@@ -60,11 +65,26 @@ public class Hibernate_Session {
     }
 
 
+    /**
+     * Shut down.
+     */
     public void shutDown(){
         sessionFactory.close();
     }
-    /** Adds a new eyewear to the database */
-    public void addEyewear(String name, String model, String description, String image_url, String brand, String size, String url, String price){
+
+    /**
+     * Adds a new eyewear to the database  @param website the website
+     *
+     * @param name        the name
+     * @param model       the model
+     * @param description the description
+     * @param image_url   the image url
+     * @param brand       the brand
+     * @param size        the size
+     * @param url         the url
+     * @param price       the price
+     */
+    public void addEyewear(String website, String name, String model, String description, String image_url, String brand, String size, String url, String price){
         //Get a new Session instance from the session factory
         Session session = sessionFactory.getCurrentSession();
 
@@ -93,6 +113,7 @@ public class Hibernate_Session {
         Session session1 = sessionFactory.getCurrentSession();
 
         frame.setEyewear_id(eyewear);
+        frame.setWebsite(website);
         frame.setSize(size);
         //Start transaction
         session1.beginTransaction();
@@ -120,7 +141,9 @@ public class Hibernate_Session {
     }
 
 
-    /** Updates the values of an existing eyewear in the database */
+    /**
+     * Updates the values of an existing eyewear in the database
+     */
     public void updateEyewear(){
         //Get a new Session instance from the session factory
         Session session = sessionFactory.getCurrentSession();
@@ -149,6 +172,11 @@ public class Hibernate_Session {
         System.out.println("Eyewear updated in database. ID: " + eyewear.getId());
     }
 
+    /**
+     * Gets count.
+     *
+     * @return the count
+     */
     public int getCount() {
         //Get a new Session instance from the session factory
         Session session = sessionFactory.getCurrentSession();
@@ -166,7 +194,11 @@ public class Hibernate_Session {
     }
 
 
-    /** Searches for Eyewear whose name is  */
+    /**
+     * Searches for Eyewear whose name is   @param name_input the name input
+     *
+     * @return the boolean
+     */
     public boolean searchEyewear(String name_input) {
         // Get a new Session instance from the session factory
         Session session = sessionFactory.getCurrentSession();
@@ -212,7 +244,9 @@ public class Hibernate_Session {
 //    }
 //
 
-    /** Deletes an eyewear in a way that will work with tables with foreign keys */
+    /**
+     * Deletes an eyewear in a way that will work with tables with foreign keys
+     */
     public void deleteEyewearsafe(){
         //Get a new Session instance from the session factory
         Session session = sessionFactory.getCurrentSession();
@@ -303,6 +337,9 @@ public class Hibernate_Session {
 //    }
 
 
+    /**
+     * Delete all rows.
+     */
     public void deleteAllRows() {
         Session session = sessionFactory.getCurrentSession();
 

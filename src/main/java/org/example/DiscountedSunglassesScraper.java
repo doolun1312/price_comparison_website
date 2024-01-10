@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * The type Discounted sunglasses scraper.
+ */
 public class DiscountedSunglassesScraper extends Thread{
 
     private int crawlDelay = 1;
@@ -17,6 +20,9 @@ public class DiscountedSunglassesScraper extends Thread{
 
     private List<String> glassestoSearch = new ArrayList<>();
 
+    /**
+     * Instantiates a new Discounted sunglasses scraper.
+     */
     public DiscountedSunglassesScraper() {
         glassestoSearch.add("Ray-ban 5228");
         glassestoSearch.add("GU7554");
@@ -100,7 +106,7 @@ public class DiscountedSunglassesScraper extends Thread{
                                 // Check if the product already exists in the database
                                 if (!hibernate.searchEyewear(name.text())) {
                                     //                             Product doesn't exist, add it to the database
-                                    hibernate.addEyewear(name.text(), model.text(), description.text(), productImage, brand.text(), "", productLink, price);
+                                    hibernate.addEyewear(website, name.text(), model.text(), description.text(), productImage, brand.text(), "", productLink, price);
                                 } else {
                                     //                             Product already exists, you may want to log or handle this case
                                     System.out.println("Product already exists in the database: " + name.text());
@@ -163,7 +169,7 @@ public class DiscountedSunglassesScraper extends Thread{
                                         // Check if the product already exists in the database
                                         if (!hibernate.searchEyewear(name.text())) {
                                             //                             Product doesn't exist, add it to the database
-                                            hibernate.addEyewear(name.text(), model.text(), description.text(), productImage, brand.text(), "", productLink, price);
+                                            hibernate.addEyewear(website, name.text(), model.text(), description.text(), productImage, brand.text(), "", productLink, price);
                                         } else {
                                             //                             Product already exists, you may want to log or handle this case
                                             System.out.println("Product already exists in the database: " + name.text());
@@ -173,7 +179,7 @@ public class DiscountedSunglassesScraper extends Thread{
                             }
 
 
-                    if (page > 10) {
+                    if (page > 7) {
                         // No next page, stop scraping
                         stopThread();
                     } else {
@@ -194,7 +200,10 @@ public class DiscountedSunglassesScraper extends Thread{
         }
 
 
-    //Other classes can use this method to terminate the thread.
+    /**
+     * Stop thread.
+     */
+//Other classes can use this method to terminate the thread.
     public void stopThread(){
         runThread = false;
     }

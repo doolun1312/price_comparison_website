@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+/**
+ * The type Eyeons scraper.
+ */
 public class EyeonsScraper extends Thread{
 
     private int crawlDelay = 1;
@@ -17,6 +20,9 @@ public class EyeonsScraper extends Thread{
 
     private List<String> glassestoSearch = new ArrayList<>();
 
+    /**
+     * Instantiates a new Eyeons scraper.
+     */
     public EyeonsScraper() {
         glassestoSearch.add("VE3186");
         glassestoSearch.add("RX5228");
@@ -104,7 +110,7 @@ public class EyeonsScraper extends Thread{
                             // Check if the product already exists in the database
                             if (!hibernate.searchEyewear(name.text())) {
                                 // Product doesn't exist, add it to the database
-                                hibernate.addEyewear(name.text(), model, description.text(), productImage, brand, size.text(), productLink, price.text());
+                                hibernate.addEyewear(website, name.text(), model, description.text(), productImage, brand, size.text(), productLink, price.text());
                             } else {
                                 // Product already exists, you may want to log or handle this case
                                 System.out.println("Product already exists in the database: " + name.text());
@@ -166,7 +172,7 @@ public class EyeonsScraper extends Thread{
                         // Check if the product already exists in the database
                         if (!hibernate.searchEyewear(name.text())) {
                             // Product doesn't exist, add it to the database
-                            hibernate.addEyewear(name.text(), model, description.text(), productImage, brand, size.text(), productLink, price.text());
+                            hibernate.addEyewear(website, name.text(), model, description.text(), productImage, brand, size.text(), productLink, price.text());
                         } else {
                             // Product already exists, you may want to log or handle this case
                             System.out.println("Product already exists in the database: " + name.text());
@@ -177,7 +183,7 @@ public class EyeonsScraper extends Thread{
                 //Shut down Hibernate
                 hibernate.shutDown();
 
-                if (page>10) {
+                if (page>5) {
                     // No next page, stop scraping
                     stopThread();
                 } else {
@@ -197,7 +203,10 @@ public class EyeonsScraper extends Thread{
         }
     }
 
-    //Other classes can use this method to terminate the thread.
+    /**
+     * Stop thread.
+     */
+//Other classes can use this method to terminate the thread.
     public void stopThread(){
         runThread = false;
     }

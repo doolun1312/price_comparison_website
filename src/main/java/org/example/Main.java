@@ -1,6 +1,14 @@
 package org.example;
 
+/**
+ * The type Main.
+ */
 public class Main {
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
         // Create an instance of the Hibernate_Session class
         Hibernate_Session hibernate = new Hibernate_Session();
